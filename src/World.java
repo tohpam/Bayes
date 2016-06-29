@@ -69,7 +69,7 @@ public class World {
     }
     
     public void removeAgent (Agent a){
-    	
+    	// fancy comment
     }
     
     // A Person is moved from the Tile
