@@ -1,11 +1,18 @@
+//AGENT
+
+//Parent class of Person and Stockpile classes
+
 public abstract class Agent {
-	public int xLocation,yLocation;
+	public int xLocation,yLocation; // Coordinates
 	
-	// function can be moved
+	// Returns true if Person and false if Stockpile
+	public abstract boolean canBeMoved(Agent a);
 	
+	// Enumeration of possible interaction results
 	public static enum ConsiderationValue {
 		ASKER_GIVESUP, ASKER_REJECTED, ASKER_APPROVED
 	}
 	
+	// Person p will consider/interact with the Agent and return a result
 	public abstract ConsiderationValue beConsidered(Person p);
 }
