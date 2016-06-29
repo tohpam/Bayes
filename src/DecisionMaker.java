@@ -12,11 +12,11 @@ public class DecisionMaker {
 	
 	public static class Decision {
 		boolean tryAsk;
-		float probTransfer;
+		float probSuccess;
 		
 		public Decision(boolean tryAsk, float probTransfer){
 			this.tryAsk=tryAsk;
-			this.probTransfer=probTransfer;
+			this.probSuccess=probTransfer;
 		}
 	}
 
