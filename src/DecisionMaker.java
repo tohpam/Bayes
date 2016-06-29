@@ -1,40 +1,36 @@
+//BAYES DECISION NET
+
 import norsys.netica.Environ;
 import norsys.netica.Net;
 import norsys.netica.NeticaException;
 import norsys.neticaEx.aliases.Node;
 
-//BAYES DECISION NET
-
-//import norsys.netica.*;
-//import norsys.neticaEx.aliases.Node;
-
 public class DecisionMaker {
 	
+	// DECISION - Publicly accessible class with results of each net computation
 	public static class Decision {
-		boolean tryAsk;
-		float probSuccess;
+		boolean tryAsk; // True if utility of Ask was greater
+		float probSuccess; // Conditional probability of successful transfer
 		
-		public Decision(boolean tryAsk, float probTransfer){
+		public Decision(boolean tryAsk, float probSuccess){
 			this.tryAsk=tryAsk;
-			this.probSuccess=probTransfer;
+			this.probSuccess=probSuccess;
 		}
 	}
 
 	private static DecisionMaker singleton = new DecisionMaker();
-
 	private Net net;
-
 	private Node resources, friends, acquaintance, result, seek, utility;
 
 	private DecisionMaker() {
 		try {
-			// set up environment
+			// Set up environment
 			Node.setConstructorClass("norsys.neticaEx.aliases.Node");
 			Environ env = new Environ ("+KannoT/UTokyo/120,310-6-A/23000");
 			net = new Net();
 			net.setName("ResourceDistribution");
 
-			// create nodes
+			// Create nodes
 			resources = new Node("Resources", "many, few", net);
 			friends = new Node("Friends", "yes, no", net);
 			acquaintance = new Node("Acquaintance", "yes, no", net);
@@ -42,11 +38,11 @@ public class DecisionMaker {
 			seek = new Node("Seek", "ask, ignore", net);
 			utility = new Node("Utility", 0, net);
 
-			// set node types
+			// Set node types
 			seek.setKind(Node.DECISION_NODE);
 			utility.setKind(Node.UTILITY_NODE);
 
-			// create links
+			// Create links between nodes
 			utility.addLink(resources);
 			utility.addLink(friends);
 			utility.addLink(result);
@@ -55,6 +51,7 @@ public class DecisionMaker {
 			result.addLink(seek);
 			friends.addLink(acquaintance);
 
+			// Set initial probabilities
 			resources.setCPTable(0.2, 0.8);
 			acquaintance.setCPTable(0.5, 0.5);
 
@@ -84,18 +81,17 @@ public class DecisionMaker {
 			utility.setRealFuncTable("few, no,  success", 100);
 			utility.setRealFuncTable("few, no,  failure", 0);
 
-			net.compile();
+			net.compile(); // Compiles finished net
 
 		} catch (NeticaException e) {
 			e.printStackTrace();
 		}
 	}
 
+	// INTEGRATION WITH SIMULATION VIA METHOD
 	private Decision decide(int pResource, boolean pAcquaintance) {
-		// INTEGRATION
-
 		try {
-			// Classifies Resources Level
+			// Classifies Resource Level
 			if (pResource > 5) {
 				resources.finding().enterState("many");
 			} else {
@@ -114,10 +110,10 @@ public class DecisionMaker {
 			// Adds probability of success to returned array
 			float success = result.getBelief("success");
 
-			// Clears up memory
+			// Clears up the inputted values
 			net.retractFindings();
-			//net.finalize();
 			
+			// Creates new Decision object with results as attributes
 			return new Decision(utils[0]>utils[1],success);
 			
 		} catch (NeticaException e) {
@@ -127,6 +123,7 @@ public class DecisionMaker {
 		return null;
 	}
 
+	// Public method to send only results to the rest of the simulation
 	public static Decision makeDecision(int pResource, boolean pAcquaintance) {
 		return singleton.decide(pResource, pAcquaintance);
 	
