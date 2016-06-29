@@ -77,6 +77,12 @@ public class Person extends Agent {
 		return ConsiderationValue.ASKER_GIVESUP;
 	}
 
+	// Returns true because Agent can be moved if it is a Person
+	@Override
+	public boolean canBeMoved(Agent a) {
+		return true;
+	}
+
 //	public String toString(){
 //	return "Person{ xLocation: "+ this.xLocation + "yLocation: " + this.yLocation + "}";
 //}
