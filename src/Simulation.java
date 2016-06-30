@@ -13,6 +13,7 @@ public class Simulation {
 	public static final int simulationTime = 1; // Time of simulation
 	public static final int mapWidth = 5; // Width of simulation map
 	public static final int mapHeight = 5; // Height of simulation map
+	public static final int acquaintanceCount = 5; // Number of acquaintance links
 
 	
 	public static void main(String[] args) {
@@ -29,13 +30,16 @@ public class Simulation {
 			worldMap.placeAgent(aPerson);
 		}
 		
-		// for 
-			// new lis
-//			Collections.copy(dest, src););
-//			Collections.shuffle(list);
-//			Person p1 = list.get(0), p2 = list.get(1)
-			// randomly selected p1 p2
-			// Person.makeAcquainted(p1, p2);
+		// Makes acquaintance links between people in the simulation
+		List<Person> willBeAcquainted = new ArrayList<Person>(personCount);
+		Collections.copy(willBeAcquainted, thePeople);
+		
+		for (int i=0; i<acquaintanceCount; i++){
+			Collections.shuffle(willBeAcquainted);
+			Person a = willBeAcquainted.get(0);
+			Person b = willBeAcquainted.get(1);
+			Person.makeAcquainted(a, b);
+		}
 		
 		// Places the stockpiles on the map
 		for(int i = 0; i < stockpileCount; i++){
@@ -45,7 +49,6 @@ public class Simulation {
 //		for (Person aPerson : thePeople){
 //			System.out.println("x, y " + aPerson.xLocation + ", " + aPerson.yLocation);
 //		}
-		
 		
 		// System.out.println("Length of the person list is " + thePeople.size());
 		
