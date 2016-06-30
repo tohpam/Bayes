@@ -48,10 +48,6 @@ public class Simulation {
 		
 		
 		// System.out.println("Length of the person list is " + thePeople.size());
-		// Person objects take initial positions
-//		for (Person aPerson: thePeople){
-//			World.placePerson(aPerson);
-//		}
 		
 		// SYSTEM STATUS
 		System.out.println("Creating a " + mapWidth + "x" + mapHeight + " 2D simulation space,");
@@ -85,6 +81,10 @@ public class Simulation {
 			// remove every agent whose function canbemoved returns true
 			// add these agents to a list L and do the following
 			// for every agent of L you use placeAgent
+			
+			// Do we really need canbemoved?  Can't I do this?
+			// for each person in thePeople
+			// worldMap.removeAgent (aPerson);
 				
 			// All Person objects move at the end
 			for (Person aPerson: thePeople){
