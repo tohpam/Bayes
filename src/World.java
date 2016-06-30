@@ -63,8 +63,6 @@ public class World {
     public void removeAgent(Agent a){
     	int x,y; // x for horizontal, y for vertical
         
-        Random rand = new Random();
-        
         // Get current coordinates of x and y
     	x = a.xLocation;
     	y = a.yLocation;
