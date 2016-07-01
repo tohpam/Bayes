@@ -64,7 +64,13 @@ public class Simulation {
 				
 				List<Agent> neighbors = worldMap.findNearbyAgents(aPerson.xLocation, aPerson.yLocation);
 				
-				// TODO sort the list. First item has best score
+				neighbors = aPerson.sortByAffinity(neighbors);
+				
+//				// To display/test the sorting
+//				for(Agent a : neighbors){
+//					System.out.print(a.getClass().getName());
+//					System.out.println("("+a.interactionAffinity(aPerson)+")");
+//				}
 				
 				if (neighbors.size()>0){
 					
