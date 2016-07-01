@@ -10,7 +10,7 @@ public class Simulation {
 	// Simulation Parameters
 	public static final int personCount = 10; // Size of population
 	public static final int stockpileCount = 1; // Number of stockpiles
-	public static final int simulationTime = 1; // Time of simulation
+	public static final int simulationTime = 30; // Time of simulation
 	public static final int mapWidth = 5; // Width of simulation map
 	public static final int mapHeight = 5; // Height of simulation map
 	public static final int acquaintanceCount = 5; // Number of acquaintance links
@@ -82,7 +82,7 @@ public class Simulation {
 				}
 				
 				
-				System.out.println("Length of the neighbor list is " + neighbors.size() +" "+aPerson);
+				// System.out.println("Length of the neighbor list is " + neighbors.size() +" "+aPerson);
 				
 			}
 			
