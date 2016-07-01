@@ -1,6 +1,7 @@
 //AGENT
 
 //Parent class of Person and Stockpile classes
+// Test comment
 
 public abstract class Agent {
 	public int xLocation,yLocation; // Coordinates
