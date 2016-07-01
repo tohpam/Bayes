@@ -7,7 +7,7 @@ public abstract class Agent {
 	public int xLocation,yLocation; // Coordinates
 	
 	// Returns true if Person and false if Stockpile
-	public abstract boolean canBeMoved(Agent a);
+	// public abstract boolean canBeMoved(Agent a);
 	
 	// Enumeration of possible interaction results
 	public static enum ConsiderationValue {

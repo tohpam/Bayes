@@ -79,10 +79,10 @@ public class Person extends Agent {
 	}
 
 	// Returns true because Agent can be moved if it is a Person
-	@Override
-	public boolean canBeMoved(Agent a) {
-		return true;
-	}
+//	@Override
+//	public boolean canBeMoved(Agent a) {
+//		return true;
+//	}
 
 	@Override
 	public int interactionAffinity(Person p) {

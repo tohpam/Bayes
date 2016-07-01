@@ -15,10 +15,10 @@ public class Stockpile extends Agent {
 	}
 
 	// Returns false because Agent cannot be moved if it is a Stockpile
-	@Override
-	public boolean canBeMoved(Agent a) {
-		return false;
-	}
+//	@Override
+//	public boolean canBeMoved(Agent a) {
+//		return false;
+//	}
 
 	@Override
 	public int interactionAffinity(Person p) {
