@@ -17,20 +17,23 @@ public class Simulation {
 
 	
 	public static void main(String[] args) {
-		// INSTANTIATORS
 		
-		// Creates the map
-		World worldMap = new World (mapWidth,mapHeight); // Creates the map of the simulation
+		//////////////////////////////////////////////////////////
+		///                   Initialization                   ///
+		//////////////////////////////////////////////////////////
+		
+		// The map of the simulation
+		World worldMap = new World (mapWidth,mapHeight);
 
-		// Creates the simulation population and places them on the map
+		// The simulation person pool (e.g. population)
 		List<Person> thePeople = new ArrayList<Person>(personCount); // ArrayList to hold Person objects
+		
+		// Populating the population
 		for(int i = 0; i < personCount; i++){
-			Person aPerson = new Person();
-			thePeople.add(aPerson);
-			worldMap.placeAgent(aPerson);
+			thePeople.add(new Person());
 		}
 		
-		// Makes acquaintance links between people in the simulation
+		// Makes acquaintance links between the persons in the simulation
 		List<Person> willBeAcquainted = new ArrayList<Person>(thePeople);
 		
 		for (int i=0; i<acquaintanceCount; i++){
@@ -45,67 +48,71 @@ public class Simulation {
 			worldMap.placeAgent(new Stockpile());
 		}
 		
-//		for (Person aPerson : thePeople){
-//			System.out.println("x, y " + aPerson.xLocation + ", " + aPerson.yLocation);
-//		}
 		
-		// System.out.println("Length of the person list is " + thePeople.size());
-		
-		// SYSTEM STATUS
+		// Initialization status
 		System.out.println("Creating a " + mapWidth + "x" + mapHeight + " 2D simulation space,");
 		System.out.println("with " + personCount + " persons and one stockpile in the center.");
 		
+		//////////////////////////////////////////////////////////
+		///                     Simulation                     ///
+		//////////////////////////////////////////////////////////
+		
+		System.out.println("\n------------------------------ Beginning of the simulation ----------------------------------\n");
+		
 		// DO PER TIME STEP
 		for (int timeStep=0; timeStep<simulationTime; timeStep++) {
-			// thePile.replenish(); // Stockpile adds 10 new resources
 			
-			// DO PER PERSON
+			// Randomly distribute the persons in the world for this round
+			for (Person aPerson: thePeople){
+				worldMap.placeAgent(aPerson);
+			}
+			
+			// ^------ PRE-ROUND ------^ //
+			
+			
+			// Each person plays its turn
 			for(Person aPerson : thePeople){
 				
+				// Retrieving the person's neighbors
 				List<Agent> neighbors = worldMap.findNearbyAgents(aPerson.xLocation, aPerson.yLocation);
 				
-				neighbors = aPerson.sortByAffinity(neighbors);
-				
-//				// To display/test the sorting
-//				for(Agent a : neighbors){
-//					System.out.print(a.getClass().getName());
-//					System.out.println("("+a.interactionAffinity(aPerson)+")");
-//				}
-				
+				// If the person has neighbors, consider asking them for resources,
+				// Starting with the agent with the highest affinity score (e.g. Stockpile > Acquaintances > Strangers )
 				if (neighbors.size()>0){
+					
+					neighbors = aPerson.sortByAffinity(neighbors);
 					
 					Agent.ConsiderationValue val;
 					do {
+						// Check next best agent until the person commits to ask (in opposition to giving up)
+						// or there is no more neighbors
+						
 						val = neighbors.remove(0).beConsidered(aPerson);
+						
 					}while(val == Agent.ConsiderationValue.ASKER_GIVESUP && neighbors.size()>0);
 					
 				}
 				
-				
-				// System.out.println("Length of the neighbor list is " + neighbors.size() +" "+aPerson);
-				
 			}
 			
-			// Shuffling the persons on the board
+			// v------ POST-ROUND ------v //
 			
-			// > First, we remove them
+			// Removing the persons from the board
+			// in anticipation of the next round
 			for( Person aPerson: thePeople){
 				worldMap.removeAgent(aPerson);
-			}
-				
-			// > Then we place them again
-			for (Person aPerson: thePeople){
-				worldMap.placeAgent(aPerson);
 			}
 
 		}
 		
-		System.out.println("----------------------------------------------------------------");
-		for( Person aPerson: thePeople ){
-			System.out.println(aPerson.toString());
-		}
+		// v-- End of Simulation --v
 		
-		System.out.println("Over");
+		for( Person aPerson: thePeople ){
+			System.out.println("\t" + aPerson.toString());
+		}
+
+		System.out.println("\n--------------------------------- End of the simulation -------------------------------------\n");
+		System.out.println("Simulation Over");
 	
 	}
 
