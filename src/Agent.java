@@ -16,4 +16,12 @@ public abstract class Agent {
 	
 	// Person p will consider/interact with the Agent and return a result
 	public abstract ConsiderationValue beConsidered(Person p);
+	
+	/**
+	 * Computes the tendency score of Person p to interact with current Agent.
+	 * 
+	 * @param p Person whose affinity with the Agent is to be computed.
+	 * @return Affinity score. Higher score means more affinity.
+	 */
+	public abstract int interactionAffinity(Person p);
 }

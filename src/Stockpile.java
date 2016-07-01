@@ -19,4 +19,9 @@ public class Stockpile extends Agent {
 	public boolean canBeMoved(Agent a) {
 		return false;
 	}
+
+	@Override
+	public int interactionAffinity(Person p) {
+		return 15;
+	}
 }

@@ -83,6 +83,11 @@ public class Person extends Agent {
 		return true;
 	}
 
+	@Override
+	public int interactionAffinity(Person p) {
+		return this.isAcquainted(p) ? 10 : 5;
+	}
+
 //	public String toString(){
 //	return "Person{ xLocation: "+ this.xLocation + "yLocation: " + this.yLocation + "}";
 //}
