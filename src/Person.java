@@ -7,6 +7,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Person extends Agent {
 	public static final int maxInitialResource = 10; // Maximum initial resources a Person can have
@@ -86,6 +87,18 @@ public class Person extends Agent {
 	@Override
 	public int interactionAffinity(Person p) {
 		return this.isAcquainted(p) ? 10 : 5;
+	}
+	
+	/**
+	 * Returns a new List<Agent> sorted by interaction affinity with the person.
+	 * @param agents List of agents to be sorted.
+	 * @return New list of sorted agents.
+	 * @see Agent#interactionAffinity(Person)
+	 */
+	public List<Agent> sortByAffinity(List<Agent> agents){
+		return agents.stream()
+					 .sorted((a1, a2) -> a2.interactionAffinity(this) - a1.interactionAffinity(this) )
+					 .collect(Collectors.toList());
 	}
 
 //	public String toString(){
