@@ -101,8 +101,8 @@ public class Person extends Agent {
 					 .collect(Collectors.toList());
 	}
 
-//	public String toString(){
-//	return "Person{ xLocation: "+ this.xLocation + "yLocation: " + this.yLocation + "}";
-//}
+	public String toString(){
+		return "Person{ xLocation: "+ this.xLocation + ", yLocation: " + this.yLocation + ", resourceLevel: " + this.resourceLevel + "}";
+	}
 	
 }
