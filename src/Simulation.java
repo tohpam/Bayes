@@ -31,8 +31,7 @@ public class Simulation {
 		}
 		
 		// Makes acquaintance links between people in the simulation
-		List<Person> willBeAcquainted = new ArrayList<Person>(personCount);
-		Collections.copy(willBeAcquainted, thePeople);
+		List<Person> willBeAcquainted = new ArrayList<Person>(thePeople);
 		
 		for (int i=0; i<acquaintanceCount; i++){
 			Collections.shuffle(willBeAcquainted);
