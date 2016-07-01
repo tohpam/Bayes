@@ -86,15 +86,14 @@ public class Simulation {
 				
 			}
 			
-			// remove every agent whose function canbemoved returns true
-			// add these agents to a list L and do the following
-			// for every agent of L you use placeAgent
+			// Shuffling the persons on the board
 			
-			// Do we really need canbemoved?  Can't I do this?
-			// for each person in thePeople
-			// worldMap.removeAgent (aPerson);
+			// > First, we remove them
+			for( Person aPerson: thePeople){
+				worldMap.removeAgent(aPerson);
+			}
 				
-			// All Person objects move at the end
+			// > Then we place them again
 			for (Person aPerson: thePeople){
 				worldMap.placeAgent(aPerson);
 			}
