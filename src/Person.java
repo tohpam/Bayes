@@ -91,6 +91,7 @@ public class Person extends Agent {
 	
 	/**
 	 * Returns a new List<Agent> sorted by interaction affinity with the person.
+	 * Higher score in first position.
 	 * @param agents List of agents to be sorted.
 	 * @return New list of sorted agents.
 	 * @see Agent#interactionAffinity(Person)
