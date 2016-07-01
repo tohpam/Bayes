@@ -100,6 +100,11 @@ public class Simulation {
 
 		}
 		
+		System.out.println("----------------------------------------------------------------");
+		for( Person aPerson: thePeople ){
+			System.out.println(aPerson.toString());
+		}
+		
 		System.out.println("Over");
 	
 	}
