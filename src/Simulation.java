@@ -158,7 +158,10 @@ public class Simulation {
 						Agent.ConsiderationValue val = neighbor.beConsidered(aPerson);
 						
 						if( val == Agent.ConsiderationValue.ASKER_APPROVED ){
-							keepLooking = Agent.transferResources(neighbor, aPerson, 1) ? false : true;
+							// keepLooking = Agent.transferResources(neighbor, aPerson, 1) ? false : true;
+							// ^-- the change we discussed --v
+							aPerson.alterResourceLevel(+1);
+							keepLooking = false;
 							
 						} else if( val == Agent.ConsiderationValue.ASKER_REJECTED ){
 							keepLooking = false;
