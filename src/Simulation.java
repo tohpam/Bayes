@@ -36,8 +36,8 @@ public class Simulation {
 			public void printHead() {
 				this.buffer.append("Turn");
 				int i = 0;
-				for(Person p : this.sim.thePeople) this.buffer.append("\tP"+ ++i);
-				this.buffer.append("\n");
+				for(Person p : this.sim.thePeople) this.buffer.append("\tP"+ ++i); // \t is the tabulation character
+				this.buffer.append("\n"); // line break
 			}
 
 			@Override
@@ -45,6 +45,29 @@ public class Simulation {
 				this.buffer.append(this.line++);
 				for(Person p : this.sim.thePeople) this.buffer.append("\t"+ p.resourceLevel);
 				this.buffer.append("\n");
+			}
+			
+		});
+		
+		sim.addChart(new Chart(sim, "Position & resources over time"){
+
+			@Override
+			public void printHead() {
+				this.buffer.append("Turn\tTime\tX\tY\tSize\n");
+			}
+
+			@Override
+			public void printLine() {
+				int i = 0;
+				for(Person p : this.sim.thePeople)
+					this.buffer.append(
+							"P"+ ++i
+							+"\t"+ this.line
+							+"\t"+ p.xLocation
+							+"\t"+ p.yLocation
+							+"\t"+ p.resourceLevel
+							+"\n");
+				this.line++;
 			}
 			
 		});
