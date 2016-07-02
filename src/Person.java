@@ -70,8 +70,10 @@ public class Person extends Agent {
 		return new Random().nextFloat() < result;
 	}
 
-	// Process of attempting/doing a resource transfer
-	// Also returns the decision that was made
+	/**
+	 * Compute the consideration value from a Bayes network using {@link DecisionMaker#makeDecision(int, boolean)}.
+	 * @see DecisionMaker#makeDecision(int, boolean)
+	 */
 	@Override
 	public ConsiderationValue beConsidered(Person p) {
 		boolean acquainted = p.isAcquainted(this); // Check whether pair is acquainted
@@ -81,7 +83,6 @@ public class Person extends Agent {
 		if (result.tryAsk){ // If utility of asking is greater for Person p
 			boolean successful = Person.getSuccess(result.probSuccess);
 			if (successful=true){ // If Person p's request was approved
-				Person.transferResource(this, p);
 				return ConsiderationValue.ASKER_APPROVED;
 			}
 			return ConsiderationValue.ASKER_REJECTED;

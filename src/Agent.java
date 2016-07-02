@@ -26,15 +26,15 @@ public abstract class Agent {
 	
 	/**
 	 * Simulates person p considering to ask the  agent for resources.
-	 * If the person commits to asking and is approved, the transaction
-	 * is taken care of.
 	 * 
 	 * @param p The person considering to ask for resources.
 	 * 
-	 * @return the state in which ended the interaction.
-	 * 		ASKER_GIVESUP if the person didn't commit to ask the agent.
-	 * 		ASKER_REJECTED if the agent declined the trade.
-	 * 		ASKER_APPROVED if the agent accepted to give some resources.
+	 * @return The state in which ended the interaction.
+	 * <ul>
+	 * 		<li>ASKER_GIVESUP if the person didn't commit to ask the agent.</li>
+	 * 		<li>ASKER_REJECTED if the agent declined the trade.</li>
+	 * 		<li>ASKER_APPROVED if the agent accepted to give some resources.</li>
+	 * </ul>
 	 * 
 	 * @see Agent.ConsiderationValue
 	 */

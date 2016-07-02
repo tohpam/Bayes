@@ -7,10 +7,12 @@
 
 public class Stockpile extends Agent {
 
-	// Gives Person p resource and returns enum result
+	/**
+	 * A stockpile always accepts to give resources.
+	 * @return {@link ConsiderationValue#ASKER_APPROVED}
+	 */
 	@Override
 	public ConsiderationValue beConsidered(Person p) {
-		p.receiveResource();
 		return ConsiderationValue.ASKER_APPROVED;
 	}
 
@@ -25,11 +27,12 @@ public class Stockpile extends Agent {
 		return 15;
 	}
 
-	@Override
 	/**
 	 * Having an infinite amount of resource, a stockpile can withstand any
 	 * alteration to its resource level. Always return true.
+	 * @return true
 	 */
+	@Override
 	public boolean alterResourceLevel(int amount) {
 		return true;
 	}
