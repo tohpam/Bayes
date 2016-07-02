@@ -47,4 +47,28 @@ public abstract class Agent {
 	 * @return Affinity score. Higher score means more affinity.
 	 */
 	public abstract int interactionAffinity(Person p);
+	
+	/**
+	 * Increase or decrease the resource level of the agent. It's an all-or-nothing operation and
+	 * will return false if the operation cannot be performed.
+	 * @param amount Amount of resource to be added or withdrawn.
+	 * @return Whether or not the operation could be performed.
+	 */
+	public abstract boolean alterResourceLevel(int amount);
+	
+	/**
+	 * Transfer resources from Agent provider to Agent beneficiary. This is an all-or-nothing
+	 * operation and will return false if cannot be performed.
+	 * @param provider Agent from whom resources are taken.
+	 * @param beneficiary Agent to whom resources are given.
+	 * @param amount Quantity of resource transfered. Should be positive.
+	 * @return Whether or not the transfer could be performed.
+	 */
+	public static boolean transferResources(Agent provider, Agent beneficiary, int amount){
+		if( provider.alterResourceLevel(-amount) ){
+			beneficiary.alterResourceLevel(+amount);
+			return true;
+		}
+		return false;
+	}
 }

@@ -47,10 +47,21 @@ public class Person extends Agent {
 		this.resourceLevel ++;
 	}
 	
+	@Override
+	public boolean alterResourceLevel(int amount){
+		if( amount < 0 && this.resourceLevel + amount < 0){
+			return false;
+		} else {
+			this.resourceLevel += amount;
+			return true;
+		}
+	}
+	
 	// Giver Person transfers resource to Receiver Person if available
 	public static void transferResource(Person giver, Person receiver){
 		if(giver.resourceLevel>0){
 			receiver.resourceLevel++;
+			giver.receiveResource();
 		}
 	}
 	

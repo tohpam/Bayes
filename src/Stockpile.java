@@ -24,4 +24,13 @@ public class Stockpile extends Agent {
 	public int interactionAffinity(Person p) {
 		return 15;
 	}
+
+	@Override
+	/**
+	 * Having an infinite amount of resource, a stockpile can withstand any
+	 * alteration to its resource level. Always return true.
+	 */
+	public boolean alterResourceLevel(int amount) {
+		return true;
+	}
 }
