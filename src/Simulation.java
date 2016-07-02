@@ -14,6 +14,8 @@ public class Simulation {
 	public static final int mapWidth = 5; // Width of simulation map
 	public static final int mapHeight = 5; // Height of simulation map
 	public static final int acquaintanceCount = 5; // Number of acquaintance links
+	
+	
 
 	
 	public static void main(String[] args) {
@@ -106,12 +108,12 @@ public class Simulation {
 		}
 		
 		// v-- End of Simulation --v
+		System.out.println("\n--------------------------------- End of the simulation -------------------------------------\n");
 		
 		for( Person aPerson: thePeople ){
 			System.out.println("\t" + aPerson.toString());
 		}
 
-		System.out.println("\n--------------------------------- End of the simulation -------------------------------------\n");
 		System.out.println("Simulation Over");
 	
 	}
