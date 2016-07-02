@@ -15,7 +15,19 @@ public class Simulation {
 	public static final int mapHeight = 5; // Height of simulation map
 	public static final int acquaintanceCount = 5; // Number of acquaintance links
 	
+	public static void printResourcesHead(List<Person> thePeople){
+		System.out.print("Turn");
+		int i = 0;
+		for(Person p : thePeople) System.out.print("\tP"+ ++i);
+		System.out.println("");
+		
+	}
 	
+	public static void printResourcesLine(List<Person> thePeople, int turnNumber){
+		System.out.print(turnNumber);
+		for(Person p : thePeople) System.out.print("\t"+ p.resourceLevel);
+		System.out.println("");
+	}
 
 	
 	public static void main(String[] args) {
@@ -61,6 +73,8 @@ public class Simulation {
 		
 		System.out.println("\n------------------------------ Beginning of the simulation ----------------------------------\n");
 		
+		printResourcesHead(thePeople);
+		
 		// DO PER TIME STEP
 		for (int timeStep=0; timeStep<simulationTime; timeStep++) {
 			
@@ -104,6 +118,9 @@ public class Simulation {
 				}
 				
 			}
+			
+			// > Printing out current resource states
+			printResourcesLine(thePeople, timeStep);
 			
 			// v------ POST-ROUND ------v //
 			
