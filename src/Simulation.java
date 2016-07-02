@@ -15,32 +15,57 @@ public class Simulation {
 	public static final int mapHeight = 5; // Height of simulation map
 	public static final int acquaintanceCount = 5; // Number of acquaintance links
 	
+	// TODO remove
 	public static void printResourcesHead(List<Person> thePeople){
-		System.out.print("Turn");
-		int i = 0;
-		for(Person p : thePeople) System.out.print("\tP"+ ++i);
-		System.out.println("");
+		
 		
 	}
 	
+	// TODO remove
 	public static void printResourcesLine(List<Person> thePeople, int turnNumber){
-		System.out.print(turnNumber);
-		for(Person p : thePeople) System.out.print("\t"+ p.resourceLevel);
-		System.out.println("");
+		
 	}
-
 	
 	public static void main(String[] args) {
 		
-		//////////////////////////////////////////////////////////
-		///                   Initialization                   ///
-		//////////////////////////////////////////////////////////
+		Simulation sim = new Simulation();
 		
+		sim.addChart(new Chart(sim, "Resource per person over time"){
+
+			@Override
+			public void printHead() {
+				this.buffer.append("Turn");
+				int i = 0;
+				for(Person p : this.sim.thePeople) this.buffer.append("\tP"+ ++i);
+				this.buffer.append("\n");
+			}
+
+			@Override
+			public void printLine() {
+				this.buffer.append(this.line++);
+				for(Person p : this.sim.thePeople) this.buffer.append("\t"+ p.resourceLevel);
+				this.buffer.append("\n");
+			}
+			
+		});
+		
+		sim.execute();
+	}
+	
+	//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////
+	
+	public World worldMap;
+	public List<Person> thePeople;
+	
+	protected List<Chart> charts;
+	
+	public Simulation(){
 		// The map of the simulation
-		World worldMap = new World (mapWidth,mapHeight);
+		worldMap = new World (mapWidth,mapHeight);
 
 		// The simulation person pool (e.g. population)
-		List<Person> thePeople = new ArrayList<Person>(personCount); // ArrayList to hold Person objects
+		thePeople = new ArrayList<Person>(personCount); // ArrayList to hold Person objects
 		
 		// Populating the population
 		for(int i = 0; i < personCount; i++){
@@ -62,18 +87,21 @@ public class Simulation {
 			worldMap.placeAgent(new Stockpile());
 		}
 		
-		
 		// Initialization status
 		System.out.println("Creating a " + mapWidth + "x" + mapHeight + " 2D simulation space,");
 		System.out.println("with " + personCount + " persons and one stockpile in the center.");
 		
-		//////////////////////////////////////////////////////////
-		///                     Simulation                     ///
-		//////////////////////////////////////////////////////////
+		// Charts
+		charts = new ArrayList<Chart>();
 		
+	}
+	
+	public void addChart(Chart c){
+		this.charts.add(c);
+	}
+	
+	public void execute(){
 		System.out.println("\n------------------------------ Beginning of the simulation ----------------------------------\n");
-		
-		printResourcesHead(thePeople);
 		
 		// DO PER TIME STEP
 		for (int timeStep=0; timeStep<simulationTime; timeStep++) {
@@ -120,7 +148,7 @@ public class Simulation {
 			}
 			
 			// > Printing out current resource states
-			printResourcesLine(thePeople, timeStep);
+			for( Chart c : this.charts ) c.printLine();
 			
 			// v------ POST-ROUND ------v //
 			
@@ -139,8 +167,11 @@ public class Simulation {
 			System.out.println("\t" + aPerson.toString());
 		}
 
-		System.out.println("Simulation Over");
-	
+		System.out.println("\n---------------------------------------- Charts ---------------------------------------------\n");
+
+		for( Chart c : this.charts ) System.out.println(c.toString());
+		
 	}
+
 
 }
