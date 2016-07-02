@@ -84,14 +84,22 @@ public class Simulation {
 					
 					neighbors = aPerson.sortByAffinity(neighbors);
 					
-					Agent.ConsiderationValue val;
+					boolean keepLooking = true;
 					do {
 						// Check next best agent until the person commits to ask (in opposition to giving up)
 						// or there is no more neighbors
 						
-						val = neighbors.remove(0).beConsidered(aPerson);
+						Agent neighbor = neighbors.remove(0);
+						Agent.ConsiderationValue val = neighbor.beConsidered(aPerson);
 						
-					}while(val == Agent.ConsiderationValue.ASKER_GIVESUP && neighbors.size()>0);
+						if( val == Agent.ConsiderationValue.ASKER_APPROVED ){
+							keepLooking = Agent.transferResources(neighbor, aPerson, 1) ? false : true;
+							
+						} else if( val == Agent.ConsiderationValue.ASKER_REJECTED ){
+							keepLooking = false;
+						}
+						
+					}while( keepLooking && neighbors.size()>0 );
 					
 				}
 				
