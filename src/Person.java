@@ -57,13 +57,13 @@ public class Person extends Agent {
 		}
 	}
 	
-	// Giver Person transfers resource to Receiver Person if available
-	public static void transferResource(Person giver, Person receiver){
-		if(giver.resourceLevel>0){
-			receiver.resourceLevel++;
-			giver.receiveResource();
-		}
-	}
+//	// Giver Person transfers resource to Receiver Person if available
+//	public static void transferResource(Person giver, Person receiver){
+//		if(giver.resourceLevel>0){
+//			receiver.resourceLevel++;
+//			giver.receiveResource();
+//		}
+//	}
 	
 	// Gets the outcome of asking for resources
 	public static boolean getSuccess(float result){
