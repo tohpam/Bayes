@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Person extends Agent {
-	public static final int maxInitialResource = 10; // Maximum initial resources a Person can have
+	public static final int maxInitialResource = 5; // Maximum initial resources a Person can have
 	public int resourceLevel; // Current resource level of the Person
 	public List<Person> acquaintances; // People that the Person knows
 
