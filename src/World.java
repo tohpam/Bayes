@@ -30,15 +30,11 @@ public class World {
         	y = rand.nextInt(height);
         }while(agentMap[x][y] != null); // If the space in (x,y) is taken, try again
     	
-//    	System.out.println("x, y " + x + ", " + y); // Tester
-    	
     	agentMap[x][y] = a; // Puts Agent in the empty (x,y) slot
     	
     	// Updates Agent's coordinates
     	a.xLocation = x;
     	a.yLocation = y;
-    	
-//    	System.out.println("x, y " + a.xLocation + ", " + a.yLocation); // Tester
     	
     }
     
